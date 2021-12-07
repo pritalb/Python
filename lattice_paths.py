@@ -13,6 +13,20 @@ Created on Fri Jul 23 17:06:07 2021
 
 
 def get_grid(size):
+    '''
+
+    Parameters
+    ----------
+    size : int
+        DESCRIPTION.
+        the number of unit lenghts of the grid, not the number of points.
+        
+    Returns
+    -------
+    grid : list
+        DESCRIPTION.
+        a list of lists. each sublist represents a row of points represented by a tuple.
+    '''
     grid = []
     
     for i in range(size + 1):
@@ -24,6 +38,34 @@ def get_grid(size):
         
     return grid
 
+def adjacent_nodes_dict(grid):
+    '''
+
+    Parameters
+    ----------
+    grid : list
+        DESCRIPTION.
+        a grid represented as a list of rows
+        
+    Returns
+    -------
+    adjacent_nodes : dictionary
+        DESCRIPTION.
+        a dictionary of nodes next to a particular node.
+        node -> [node to right, node below]
+    '''
+    grid_size = len(grid)
+    adjacent_nodes = {}
+    
+    for i in range(grid_size):
+        for j in range(grid_size):
+            node = (i, j)
+            
+            if node not in adjacent_nodes.keys():
+                adjacent_nodes[node] = next_node(grid, node)
+                
+    return adjacent_nodes
+
 def next_node(grid, node):
     '''
 
@@ -31,10 +73,8 @@ def next_node(grid, node):
     ----------
     grid : TYPE
         a grid of a specified size.
-    i : TYPE
-        current row of the current node.
-    j : TYPE
-        current column of the curent node.
+    node : TYPE
+        a point/node in the grid
 
     Returns
     -------
@@ -43,11 +83,11 @@ def next_node(grid, node):
     None if the node is the last node in a grid.
 
     '''
-    i = node[0]
-    j = node[1]
+    i = node[0] # row
+    j = node[1] # column
     
-    grid_size = len(grid) - 1 # we subtract 1 because we need the lenght of the grid, not the number of points in it. 
-    # print('grid size:', grid_size)
+    # we subtract 1 because we need the lenght of the grid, not the number of points in it.
+    grid_size = len(grid) - 1  
     out = []
 
     if i == grid_size and j == grid_size:
@@ -61,57 +101,68 @@ def next_node(grid, node):
         
     return out
 
-def append_next_nodes_to_paths(grid, paths_list):
-    paths = paths_list[:]
-    
-    for path in paths:
-        print('\npaths:', paths)
-        print('current path:', path)
-        
-        current_node = path[-1]
-        print('current node:', current_node)
-        
-        next_nodes = next_node(grid, current_node)
-        print('\t next nodes:', next_nodes)
-        
-        if len(next_nodes) > 1:
-            path_copy = path[:]
-                        
-            path.append(next_nodes[0])
-            path_copy.append(next_nodes[1])
-            # print(path_copy, '\n')
-            
-            paths = paths + [path_copy]
-        else:
-            path.append(next_nodes[0])
-            
-            
-    return paths
 
 def lattice_paths(grid):
-    paths = [[(0, 0)]]
+    '''
+
+    Parameters
+    ----------
+    grid : List
+        DESCRIPTION.
+        a grid of size n
         
-    while next_node(grid,paths[-1][-1]):
-        print('\n', '-' * 5)
-        
-        paths = append_next_nodes_to_paths(grid, paths)
-        print('\n current paths:', paths)
+    Returns
+    -------
+    List
+        DESCRIPTION.
+        a list of paths that lead to the last node (n, n) of the grid
+    '''
     
-    return paths
+    adjacent_nodes = adjacent_nodes_dict(grid)
+    grid_size = len(grid) - 1
+    last_node = (grid_size, grid_size)
+ 
+    # stores list of paths that lead to nodes.   node -> list of paths where a path itself is a list of nodes
+    path_dict = {
+        (0, 0) : [[(0, 0)]]
+        }
+    
+    paths = []
+    for node in adjacent_nodes.keys():
+        # print('\n', '- - - - -' * 5, '\n')
 
-# grid represented by storing its points in a 2-d list
+        if node in path_dict.keys():
+            paths = path_dict[node]
+        
+        next_nodes = adjacent_nodes[node]
+        # print('currently on node:', node)
+        
+        if not next_nodes:
+            break
+        
+        for next_node in next_nodes:
+            if len(paths) > 1:
+                for path in paths:
+                    appended_path = path + [next_node]
 
-# grid = [
-#     ['00', '01'],
-#     ['10', '11'],
-# ]
-
-grid = get_grid(2)
+                    if next_node in path_dict.keys():
+                        path_dict[next_node].append(appended_path)
+                    else:
+                        path_dict[next_node] = [appended_path]
+            else:
+                path = paths[0]
+                appended_path = path + [next_node]
+                
+                if next_node in path_dict.keys():
+                    path_dict[next_node].append(appended_path)
+                else:
+                    path_dict[next_node] = [appended_path]
+        
+    return path_dict[last_node]
+        
+grid = get_grid(20)
 result = lattice_paths(grid)
 
-# print(grid)
-
-# print(next_node(grid, (1, 1)))
-print('\n' * 2)
-print('lattice paths of the grid:', result)
+print('\n' * 5)
+# print('lattice paths of the grid:\n', *result, sep='\n')
 print('total number of paths:', len(result))
