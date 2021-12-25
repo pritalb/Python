@@ -64,15 +64,16 @@ def node_path_dict_top_half(grid_top_half, grid_size):
             continue
 
         for adjacent_node in adjacent_nodes:
-            path_upto_current_node = path_dict[node][0] + [adjacent_node]
+            for path in path_dict[node]:
+                path_upto_current_node = path + [adjacent_node]
 
-            if adjacent_node in path_dict.keys():
-                paths_upto_now = path_dict[adjacent_node] # does not include current node
-                
-                # for path in paths_upto_now:
-                path_dict[adjacent_node].append(path_upto_current_node)
-            else:
-                path_dict[adjacent_node] = [path_upto_current_node]
+                if adjacent_node in path_dict.keys():
+                    paths_upto_now = path_dict[adjacent_node] # does not include current node
+                    
+                    # for path in paths_upto_now:
+                    path_dict[adjacent_node].append(path_upto_current_node)
+                else:
+                    path_dict[adjacent_node] = [path_upto_current_node]
     return path_dict
 
 def lattice_paths_top(grid_size):
@@ -129,15 +130,16 @@ def node_path_dict_bottom_half(grid_bottom_half, grid_size):
             continue
 
         for adjacent_node in adjacent_nodes:
-            path_upto_current_node = path_dict[node][0] + [adjacent_node]
+            for path in path_dict[node]:
+                path_upto_current_node = path + [adjacent_node]
 
-            if adjacent_node in path_dict.keys():
-                paths_upto_now = path_dict[adjacent_node] # does not include current node
-                
-                # for path in paths_upto_now:
-                path_dict[adjacent_node].append(path_upto_current_node)
-            else:
-                path_dict[adjacent_node] = [path_upto_current_node]
+                if adjacent_node in path_dict.keys():
+                    paths_upto_now = path_dict[adjacent_node] # does not include current node
+                    
+                    # for path in paths_upto_now:
+                    path_dict[adjacent_node].append(path_upto_current_node)
+                else:
+                    path_dict[adjacent_node] = [path_upto_current_node]
     return path_dict
 
 
@@ -206,18 +208,41 @@ def test_get_adjacent_node_bottom_half(grid_size):
 def correct_lattice_paths_num(height, width):
     return int(factorial(width + height) / (factorial(width) * factorial(height)))
 
-def test_lattice_paths():
+def test_lattice_paths_top():
     test_cases = [
-        1, 2, 3,
+        1, 2, 3, 20,
     ]
 
     for test_case in test_cases:
+        print('\n', '-' * 5)
+        paths = lattice_paths_top(test_case)
+        print('test grid size:', test_case)
+        print(*paths.items(), sep='\n')
+
+def test_lattice_paths_bottom():
+    test_cases = [
+        1, 2, 3, 20,
+    ]
+
+    for test_case in test_cases:
+        print('\n', '-' * 5)
+        paths = lattice_paths_bottom(test_case)
+        print('test grid size:', test_case)
+        print(*paths.items(), sep='\n')
+
+def test_lattice_paths():
+    test_cases = [
+        1, 2, 3, 4, 7, 9, 20,
+    ]
+
+    for test_case in test_cases:
+        print('\n', '_____' * 5)
+
         paths = lattice_paths(test_case)
         expected_paths_num = correct_lattice_paths_num(test_case, test_case)
         actual_paths_num = len(paths)
 
-        print('\n', '_____' * 5)
-        print('List of lattice paths: ', *paths, sep='\n')
+        # print('\n List of lattice paths: ', *paths, sep='\n')
         print('Grid size:', test_case, '\nExpected number of paths:', expected_paths_num, '\n Actual number of paths found:', actual_paths_num)
 
 test_lattice_paths()
