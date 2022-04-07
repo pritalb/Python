@@ -2,7 +2,7 @@
 """
 Created on Fri Dec 25 16:25:28 2020
 
-@author: Admin
+@author: Prital Bamnodkar
 """
 
 def minion_game(string):

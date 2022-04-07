@@ -38,27 +38,3 @@ def counting_sundays(start_year, end_year, jan1_dotw_start_year):
     return sundays_count
 
 print(counting_sundays(1901, 2000, 2))
-
-# def date_tuple(date_str):
-#     # converts a 'yyyy-mm-dd' format date to a tuple of ints -> (year, month, day)
-#     date_list_format = date_str.split('-')
-#     return tuple(map(int, date_list_format))
-
-# def counting_days(start_date, end_date):
-#     days_in_months = [
-#         31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
-#     ]
-#     start_date_tup = date_tuple(start_date)
-#     end_date_tup = date_tuple(end_date)
-
-#     year_diff = end_date_tup[0] - start_date_tup[0]
-#     month_diff = end_date_tup[1] - start_date_tup[1]
-#     day_diff = end_date_tup[2] - start_date_tup[2]
-
-#     days_between_years = year_diff * 365 + (year_diff // 4)
-
-
-# def counting_sundays(start_date, end_date):
-#     pass
-
-# print(counting_days('2022-01-01', '2022-02-01'))
