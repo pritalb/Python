@@ -10,29 +10,6 @@ Created on Fri Apr 30 19:30:37 2021
 
 from prime_efficient import get_primes_less_than
 
-# def primes_less_than(n):
-#     '''
-
-#     Parameters
-#     ----------
-#     n : Int
-#         DESCRIPTION.
-
-#     Returns
-#     -------
-#     List
-#         a list of all primes less than n
-
-#     '''
-#     primes = []
-    
-#     for i in range(2, n + 1):
-#         if is_prime(i):
-#             primes.append(i)
-            
-#     return primes
-    
-
 def prime_sum(n):
     '''
 
@@ -48,8 +25,6 @@ def prime_sum(n):
 
     '''
     primes = get_primes_less_than(n)
-    # print(primes)
-    
     return sum(primes)
         
     

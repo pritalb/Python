@@ -25,8 +25,6 @@ def is_prime(n):
 
     '''
     factors_list = unique_factors(n)
-    # print(factors_list)
-    
     if len(factors_list) == 2 and factors_list[-1] == n:
         return True
     return False

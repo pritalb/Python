@@ -14,9 +14,8 @@ def minion_game(string):
     for i in range(1, len(string) + 1): #i is the the lenght of substring to find. smallest substrings will be single character, biggest is the string itself
         for j in range(len(string) - i + 1): #loop characters in the string
             sub_string_list.append(string[j: j+i])
-            print("loop 1")
             
-        #make a dict of elements in the list
+    #make a dict of elements in the list
     #the keys will be the substrings, and the values will be their frequency in string, use count() function to get their frequency
     sub_dict = {}
     print("2")

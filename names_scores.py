@@ -43,7 +43,6 @@ def names_score():
     names = names.split('","')
     
     names.sort()
-    # print(names)
     
     # the first word of the file is "MARY", when we split the file data into a list,
     # we use split with arguments '","' since the first word has " and not ",", that first " wasnt removed
@@ -51,9 +50,6 @@ def names_score():
     names[0] = names[0][1:]
     
     names.sort()
-    
-    # for i in range(100):
-    #     print(names[i])
     
     for name in names:
         try:
@@ -63,6 +59,4 @@ def names_score():
     
     return out
     
-
-# print(word_score('COLIN'))
 print(names_score())

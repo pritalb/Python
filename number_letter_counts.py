@@ -30,15 +30,9 @@ def num_to_letters(n):
     
     res = ''
     if n > 20:
-        n_expanded = get_expanded_form(n)
-        # print('expanded form of', n, 'before splitting into a list:', n_expanded)
-        
+        n_expanded = get_expanded_form(n)        
         n_expanded_broken = list(map(int, (n_expanded.split(' + '))))
-        
-        # print('expanded form of', n, ':',n_expanded_broken)
-    
-    # print(n_expanded, n_expanded.split(' + ')
-    
+                
     if n < 20 and n != 10:
         res = digits[n]
     elif n < 100 and n % 10 == 0:
@@ -80,9 +74,7 @@ def count_letters(num_letters_list):
         
         num_copy = num_copy.replace(' ', '')
         num_copy = num_copy.replace('-', '')
-        
-        # print('--', num, ' : ',  num_copy)
-        
+                
         count += len(num_copy)
         
     return count
@@ -96,12 +88,11 @@ def get_expanded_form(n):
         try:
             digit = int(n_str_reversed[i])
         except:
-            print('error explanding ...', 'n_str:', n_str,' n_str_reversed:', n_str_reversed, ' i:', i)
+            print('error expanding ...', 'n_str:', n_str,' n_str_reversed:', n_str_reversed, ' i:', i)
         
         if digit == 0:
             continue
         
-        # print('--',i)
         res.append(str(digit * 10**i))
 
     return ' + '.join(reversed(res))
@@ -134,5 +125,4 @@ def test_get_expanded_form():
 # print(num_to_letters(1001))
 # test_get_expanded_form()
 
-# print(num_to_letters_ranged(31))
 print(count_letters(num_to_letters_ranged(1, 1001)))

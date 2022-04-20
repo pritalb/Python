@@ -29,11 +29,8 @@ def triangle_num_with_n_divisors(n):
     num = 1
     
     while True:
-        print('\n', '-' * 5)
         num = num + i
         divisors_ls = divisors(num)
-        print(num, len(divisors_ls))
-        
         if len(divisors_ls) >= n:
             return num
         

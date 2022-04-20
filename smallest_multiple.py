@@ -87,8 +87,6 @@ def smallest_multiple(n):
                     res_fact_dict[factor] = i_fact_dict[factor]
             else:
                 res_fact_dict[factor] = 1
-                
-    print('\t--',res_fact_dict)
     
     for factor in res_fact_dict.keys():
         res *= (factor  ** res_fact_dict[factor])
@@ -97,5 +95,3 @@ def smallest_multiple(n):
     
 
 print(smallest_multiple(20))
-# print(factors(100))
-# print(get_factors_dict(100))

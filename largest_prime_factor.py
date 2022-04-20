@@ -12,24 +12,17 @@ factors_list = []
 n = 600851475143
 
 def factors(n):
-    # print("--------", n)
-    # print('\t--calculating factors of', n, end=" ")
     num = n
     i = 1
     res = []
     
     while num >= i:
-        # print('\t*', num, i)
         if num % i == 0:
             res.append(i)
             num = num // i
-            # if num not in res:
-            #     res.append(num) 
-            
         if num % i != 0 or i == 1:
             i += 1
         
-    # print('--factors:', res)
     return res
 
 def divisors(n):
@@ -50,19 +43,14 @@ def unique_factors(n):
         if factor not in res:
             res.append(factor)
             
-    # print('\tunique factors: ', res)
     return res
     
 def prime_factors(n):
-    
     factors_list = unique_factors(n)
     res = []
     
-    # print("\t--prime_factors running for value", n, 'with factors', factors_list)
-    
     for factor in factors_list:
         f_lst = factors(factor)
-        # print('--factor', factor, factors(factor))        
         if len(f_lst) == 2 and f_lst[-1] == factor:
             res.append(factor)
     
@@ -70,11 +58,5 @@ def prime_factors(n):
 
 def max_prime_factor(n):
     return max(prime_factors(n))
-        
-# for test in [2, 16, 78, 39, 13, 31, 100, 1641, 141233]:
-#     print('##', test, ':')
-#     print('\t', '--prime factors--', prime_factors(test))
-
-# print(divisors(100))
 
 # print('biggest prime factor of', n, 'is', max_prime_factor(n))

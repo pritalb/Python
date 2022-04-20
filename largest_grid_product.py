@@ -70,76 +70,40 @@ pairs = []
 # vertical pairs
 for i in range(17):
     row = grid[i]
-    # print('\n dividing the following row in parts')
-    # print(row)
     
     for j in range(len(row)): # get the elements in the row
         pair = []
         for k in range (i, i + 4): # get vertically adjacent elements
             pair.append(grid[k][j])
-        # print(pair)
         pairs.append(pair)
-        
-    # print('_' * 5)
-            
-        
-        
 
 # horizontal pairs
-for row in grid:
-    # print('\n dividing the following row in parts')
-    # print(row)
-    
+for row in grid:    
     for i in range(17):
         pair = []
         for j in range(i, i + 4):
             pair.append(row[j])
-        # print(pair)
         pairs.append(pair)
     
-    # print('-' * 5,)
-
 # # diagonal left to right
 for i in range(17):
     row = grid[i]
-    # print('\n','-' * 5,)
-    # print(row)
     
     for j in range(17):
         pair = []
         for k in range(4):
             pair.append(grid[i + k][j + k])
-        # print(pair)
-        pairs.append(pair)
-        
-    # print('-' * 5,)
-    
-            
+        pairs.append(pair)            
 
 # diagonal right to left
 for i in range(17):
     row = grid[i]
-    # print('\n','-' * 5,)
-    # print(row)
     
     for j in range(19, 3, -1):
         pair = []
         for k in range(4):
             pair.append(grid[i + k][j - k])
-        # print(pair)
         pairs.append(pair)
-        
-    # print('-' * 5,)
 
-# print(pairs)
 print('Number of pairs:', len(pairs))
-# print(product([1, 2, 3, 4]))
-
-#testing
-# ls = [[1, 2], [3, 4], [5, 5], [6, 7]]
-# ls_sum = list(map(product, ls))
-
-# print(ls_sum)
-# print(max(ls_sum))
-
 print(max(list(map(product, pairs))))

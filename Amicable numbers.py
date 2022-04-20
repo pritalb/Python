@@ -30,11 +30,9 @@ def amicable_pair(n):
     pair = sum(n_divisors)
     
     pair_divisors_sum = sum(divisors(pair)[:-1])
-    # print('---', n, pair, pair_divisors_sum)
     
     if n == pair_divisors_sum and n != pair:
         return [n, pair]
     return None
 
 print(sum(amicable_pairs_less_than(10000)))
-# print(amicable_pair(28))

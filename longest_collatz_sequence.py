@@ -21,10 +21,9 @@ Created on Mon Jun 14 16:54:45 2021
 
 def collatz_sequence(n):
     res = [n]
-    print('--calculating collatz sequence for:', n)
     
     if n == 0:
-        return
+        return None
     
     while n != 1:
         if n % 2 == 0:

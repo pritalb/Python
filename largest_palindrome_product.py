@@ -37,27 +37,19 @@ def is_palindrome(s):
     n = len(s)
     
     for i in range(0, n - 1):
-        # print('\titeration', i)
         j = n - 1 - i
-        # print('\t', s[i], s[j])
         if s[i] == s[j]:
             continue
         else:
-            # print('\treturning false for ', i, 'and', j, 'on iteration ', i)
-            return False
-        
+            return False        
     return True
 
 palindrome_numbers = []
 
 for i in range(999, 1, -1):
     for j in range(i, 1, -1):
-        print(i, j, i*j)
         if is_palindrome(str(i * j)):
             palindrome_numbers.append(i*j)
           
 print(palindrome_numbers)
 print(max(palindrome_numbers))
-# for test in ['abba', 'a', 'aba', 'cat', 'abca']:
-#     print('#', test)
-#     print('\t result:', test, is_palindrome(test))

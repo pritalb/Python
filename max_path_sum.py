@@ -44,7 +44,6 @@ def paths(pyramid, i, j, visited_nodes): # i and j to keep track of which node w
     # the fewer nodes it would have under it and the smaller its respective pyramid would be.
     node_pyramid_size = pyramid_size - i
     
-    # print('node:', node, 'i:', i, 'j:', j)
     if node_index in visited_nodes.keys():
         return visited_nodes[node_index]
     else:
@@ -56,10 +55,8 @@ def paths(pyramid, i, j, visited_nodes): # i and j to keep track of which node w
                 [node] + paths(pyramid, i + 1, j + 1, visited_nodes)
             ]
         else:
-            # if i < pyramid_size - 1 and j < pyramid_size - 1:
             try:
                 adjacent_node_1_paths = paths(pyramid, i + 1, j, visited_nodes)
-                
                 adjacent_node_2_paths = paths(pyramid, i + 1, j + 1, visited_nodes)
                  
                 out = []
@@ -72,8 +69,6 @@ def paths(pyramid, i, j, visited_nodes): # i and j to keep track of which node w
             except:
                 print('error at node:', node, 'i:', i, 'j:', j)
                 
-            
-    # print('\t\tout:', out)
     visited_nodes[node_index] = out
     return out
 
@@ -97,4 +92,3 @@ pyramid = [
 
 pyramid_paths = paths(pyramid, 0, 0, visited_nodes)
 print(max(list(map(sum, pyramid_paths))))
-# print('\n visited nodes:', visited_nodes.keys(), '\n', 'paths:', visited_nodes)
